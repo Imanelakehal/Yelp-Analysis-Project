@@ -78,14 +78,14 @@ body {
 }
 
 .rectangle {
-    width: 220px;
+    width: 210px;
     height: 120px;
     background-color: #165A4A;
     color: white;
     padding: 20px;
     border-radius: 50px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 190px;
 }
 
 .rectangle p {
@@ -126,13 +126,33 @@ body {
 
 .search-bar img {
     width: 20px; /* Set the width of the search icon */
-    margin-right: 10px; /* Add space between the icon and input field */
+    margin-right: 20px; /* Add space between the icon and input field */
 }
 
 .search-bar input[type="text"] {
-    width: calc(100% - 30px); /* Take up remaining width after considering the width of the icon and margin */
-    height: 100%; /* Match the height of the search bar */
+    width: 150px; /* Take up remaining width after considering the width of the icon and margin */
+    height: 95%; /* Match the height of the search bar */
     border: none; /* Remove default input border */
     outline: none; /* Remove outline */
     font-size: 16px; /* Set font size */
+}
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #EB862A;
+    border-radius: 50%;
+    display: flex; /* Keep flexbox for centering */
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Position the circle relative to the viewport */
+    top: 6px; /* Adjust top position */
+    right: 20px; /* Adjust right position */
+    z-index: 999; /* Ensure the circle appears above other elements */
+}
+
+.profile-circle img {
+    width: 20px;
+    height: 20px;
+    fill: black; /* If your SVG uses fill */
+    padding-left: 19px; /* Adjust padding to move the icon to the right */
 }
