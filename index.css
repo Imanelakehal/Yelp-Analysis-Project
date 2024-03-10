@@ -6,12 +6,15 @@ body {
 }
 
 .navbar {
-    width: 230px;
+    width: 260px;
     height: 1024px;
     background-color: white;
     float: left;
     padding: 20px; /* Add padding to the navbar */
+    border: 2px solid #737A81; /* Add a 2px solid grey border around the navbar */
+    box-sizing: border-box; /* Ensure the border is included in the width and height calculations */
 }
+
 
 .logo h1 {
     font-family: 'Roboto', sans-serif;
@@ -107,4 +110,29 @@ body {
 .knowmore:hover {
     background-color: #EB862A;
     color: white;
+}
+
+.search-bar {
+    position: fixed;  /* Fix the search bar to the top of the viewport */
+    left: 260px;
+    width: 100vw;
+    height: 50px;
+    background-color: white;
+    margin: 0px auto; /* Center the search bar horizontally */
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 0 20px; /* Add padding to the search bar */
+}
+
+.search-bar img {
+    width: 20px; /* Set the width of the search icon */
+    margin-right: 10px; /* Add space between the icon and input field */
+}
+
+.search-bar input[type="text"] {
+    width: calc(100% - 30px); /* Take up remaining width after considering the width of the icon and margin */
+    height: 100%; /* Match the height of the search bar */
+    border: none; /* Remove default input border */
+    outline: none; /* Remove outline */
+    font-size: 16px; /* Set font size */
 }
