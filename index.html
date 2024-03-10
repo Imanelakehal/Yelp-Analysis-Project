@@ -15,24 +15,84 @@
         <button class="button">
             <img src="overviewicon.svg" alt="Icon"> Overview
         </button>
-        <button class="button" style="margin-top: 14px;">
+        <button id="businessesButton" class="button" style="margin-top: 14px;">
             <img src ="icon2.svg" alt="icon2"> Businesses
         </button>
-        <button class="button" style="margin-top: 14px;">
+        <button id="usersButton" class="button" style="margin-top: 14px;">
             <img src="icon3.svg" alt="icon3">  Users
         </button>
-        <button class="button" style="margin-top: 14px;">
+        <button id="ratingButton" class="button" style="margin-top: 14px;">
             <img src="icon4.svg" alt="icon4">  Rating
         </button>
-        <button class="button" style="margin-top: 14px;">
+        <button id="reviewsButton" class="button" style="margin-top: 14px;">
             <img src="icon5.svg" alt="icon5">  Reviews
         </button>
-        <button class="button" style="margin-top: 14px;">
+        <button id="checkinButton" class="button" style="margin-top: 14px;">
             <img src="icon6.svg" alt="icon6">  Check-in
         </button>
-        <button class="button" style="margin-top: 14px;">
+        <button id="aboutButton" class="button" style="margin-top: 14px;">
             <img src="icon7.svg" alt="icon7"> About
         </button>
+        <script>
+            // Get the button element by its id
+            const businessesButton = document.getElementById('businessesButton');
+    
+            // Add event listener to handle button click
+            businessesButton.addEventListener('click', function() {
+                // Navigate to the desired page
+                window.location.href = 'businesses.html';
+            });
+        </script>
+        <script>
+            // Get the button element by its id
+            const usersButton = document.getElementById('usersButton');
+    
+            // Add event listener to handle button click
+            usersButton.addEventListener('click', function() {
+                // Navigate to the desired page
+                window.location.href = 'Users.html';
+            });
+        </script>
+        <script>
+            // Get the button element by its id
+            const ratingButton = document.getElementById('ratingButton');
+    
+            // Add event listener to handle button click
+            ratingButton.addEventListener('click', function() {
+                // Navigate to the desired page
+                window.location.href = 'Rating.html';
+            });
+        </script>
+        <script>
+            // Get the button element by its id
+            const viewersButton = document.getElementById('viewersButton');
+    
+            // Add event listener to handle button click
+            viewersButton.addEventListener('click', function() {
+                // Navigate to the desired page
+                window.location.href = 'Viewers.html';
+            });
+        </script>
+        <script>
+            // Get the button element by its id
+            const checkinButton = document.getElementById('checkinButton');
+    
+            // Add event listener to handle button click
+            checkinButton.addEventListener('click', function() {
+                // Navigate to the desired page
+                window.location.href = 'checkin.html';
+            });
+        </script>
+        <script>
+            // Get the button element by its id
+            const aboutButton = document.getElementById('aboutButton');
+    
+            // Add event listener to handle button click
+            aboutButton.addEventListener('click', function() {
+                // Navigate to the desired page
+                window.location.href = 'about.html';
+            });
+        </script>
 
         <!-- Information section inside the navbar -->
         <div class="info-section">
