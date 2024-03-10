@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Define a route for the home page
 @app.route('/')
 def index():
-    return 'Hello World'
+    return 'Hello imani'
 
 # Run the Flask application if the script is executed directly
 if __name__ == '__main__':
