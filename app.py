@@ -1,13 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template, send_from_directory
 
-# Create a Flask application instance
 app = Flask(__name__)
+app.static_folder = 'static'  # Set static folder path
 
-# Define a route for the home page
+# Route for the home page
 @app.route('/')
-def index():
-    return 'Hello imani'
+def render_website():
+    return render_template('index.html')
 
-# Run the Flask application if the script is executed directly
 if __name__ == '__main__':
     app.run(debug=True)
