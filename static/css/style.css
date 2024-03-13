@@ -58,7 +58,7 @@ body {
     width: 20px;
     height: auto;
     transition: filter 0.3s;
-    fill: #737A81;
+    fill: black;
 }
 
 .button:hover {
@@ -155,4 +155,18 @@ body {
     height: 20px;
     fill: black; /* If your SVG uses fill */
     padding-left: 19px; /* Adjust padding to move the icon to the right */
+}
+
+.section-below-search {
+    position: fixed;
+    top: 50px;
+    left: 260px;
+    width: calc(100vw - 260px);
+    background-color: white;
+    border-top: 1px solid #737A81;
+    border-bottom: 1px solid #737A81;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    height: 20px; /* Set the height to your desired value */
 }
