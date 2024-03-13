@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reviews Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews Page</title>
 </head>
 <body>
-    <h1> AAAAAAAAAAA 3IW 3IW Shkader hna azi nshuflk dik trma  </h1>
-    
+    <h1>Reviews Page</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.rev_year }}</td>
+                <td>{{ item.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
