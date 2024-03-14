@@ -8,13 +8,21 @@
 </head>
 <body>
     <link rel="stylesheet" href="static\css\style.css">
-    <div class="search-bar">
-        <img src="static\css\SearchIcon.svg" alt="Search Icon">
-        <input type="text" placeholder="Search...">
-        <div class="profile-circle">
-            <img src="static\css\profile.svg" alt="Profile Icon">
+    <form autocomplete="off">
+        <div class="search-bar">
+            <img src="static/css/SearchIcon.svg" alt="Search Icon">
+            <label for="input">Search:</label>
+            <input type="text" id="input" placeholder="Enter your search query">
+            <ul class="List"></ul>
+            <div class="profile-circle">
+                <img src="static/css/profile.svg" alt="Profile Icon">
+            </div>
         </div>
-    </div>
+        <div class="suggestions-container"></div>
+    </form>
+    <script src="{{ url_for('static', filename='css/app.js') }}"></script>
+
+    
     <div class="section-below-search">
         <h2>Overview</h2>
         <!-- Additional content for your section goes here -->
@@ -74,7 +82,7 @@
         // Add event listener to handle button click
         usersButton.addEventListener('click', function() {
             // Navigate to the desired page
-            window.location.href = 'templates\Users.html';
+            window.location.href = 'Users.html';
         });
     </script>
     <script>
@@ -84,7 +92,7 @@
         // Add event listener to handle button click
         ratingButton.addEventListener('click', function() {
             // Navigate to the desired page
-            window.location.href = 'templates\Rating.html';
+            window.location.href = '\templates\Rating.html';
         });
     </script>
     <script>
