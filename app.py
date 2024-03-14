@@ -24,17 +24,35 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
 
+class ReviewSummary(db1.Model):
+    __tablename__ = 'review_summary'
+    rev_year = db1.Column(db1.Integer, primary_key=True)
+    rev_cool_sum = db1.Column(db1.Integer)
+    rev_useful_sum = db1.Column(db1.Integer)
+    rev_funny_sum = db1.Column(db1.Integer)
+
+class WordCount(db1.Model):
+    __tablename__ = 'word_ranking'
+    word = db1.Column(db1.String(50), primary_key=True)
+    count = db1.Column(db1.Integer)
+
 # Route for the home page
 @app.route('/')
 def render_website():
     return render_template('index.html')
 
 # Route for the reviews page
-@app.route('/reviews')
+@app.route('/templatesReviews.html')
 def reviews():
-    # Query the database to retrieve data from the reviews table
-    data = Review.query.order_by(Review.rev_year.asc()).all()
-    return render_template('Reviews.html', data=data)
+    # Query data from all three tables
+    review_data = Review.query.order_by(Review.rev_year.asc()).all()
+    summary_data = ReviewSummary.query.order_by(ReviewSummary.rev_year.asc()).all()
+    word_ranking_data = WordCount.query.order_by(WordCount.count.desc()).limit(10).all()
+
+    # Pass data to the template
+    return render_template('Reviews.html', review_data=review_data, 
+                           summary_data=summary_data, word_ranking_data=word_ranking_data)
+
 
 ############################################################### Users Page ###############################################################
 
