@@ -1,4 +1,4 @@
-let countries = ["Sichuan University", "Shanghai", "Beijing", "Guangzhou", "Chengdu", "Hangzhou", "Xi'an", "Shenzhen"];
+let countries = ["Sichuan ", "Shanghai", "Beijing", "Guangzhou", "Chengdu", "Hangzhou", "Xi'an", "Shenzhen"];
 let sortedCountries = countries.sort();
 let input = document.getElementById("input");
 let suggestionsContainer = document.querySelector(".suggestions-container");
