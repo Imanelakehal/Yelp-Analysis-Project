@@ -18,15 +18,16 @@
                 <img src="static/css/profile.svg" alt="Profile Icon">
             </div>
         </div>
-        <div class="suggestions-container"></div>
-    </form>
-    <script src="{{ url_for('static', filename='css/app.js') }}"></script>
+    
+    
 
     
     <div class="section-below-search">
         <h2>Overview</h2>
+        <div class="suggestions-container"></div>
         <!-- Additional content for your section goes here -->
     </div>
+   </form> 
     <div class="navbar">
         <div class="logo">
             <h1>Yelp</h1>
@@ -125,6 +126,7 @@
             window.location.href = 'templates\about.html';
         });
     </script>
+    <script src="{{ url_for('static', filename='css/app.js') }}"></script>
 
 </body>
 </html>
