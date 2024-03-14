@@ -85,11 +85,11 @@ def total_reviews():
 
 
 @app.route('/Users.html')
-def total_users():
-    total_users = User.query.count()
-    return f"Total Users: {total_users}"
+def users():
+    # Query the database to retrieve data from the users table
+    users_data = User.query.all()
+    return render_template('Users.html', users_data=users_data)
 
-''''''''''''''''''''''''''''''''''''' users analysis'''''''''''''''''''''''''''''''''''''
-
+if __name__ == '__main__':
 if __name__ == '__main__':
    app.run(debug=True)
