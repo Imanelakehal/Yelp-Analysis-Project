@@ -1,5 +1,9 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+import pymysql
+
+
+pymysql.install_as_MySQLdb()
 
 app = Flask(__name__, static_url_path='/static')
 
