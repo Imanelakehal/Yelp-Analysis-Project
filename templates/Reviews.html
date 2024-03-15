@@ -4,20 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f2f2f2;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         h1 {
             text-align: center;
             margin-bottom: 30px;
+            font-size: 36px;
+            color: #007bff;
         }
         h2 {
             margin-top: 50px;
             margin-bottom: 20px;
+            font-size: 24px;
+            color: #4CAF50;
         }
         table {
             width: 100%;
@@ -48,73 +59,196 @@
             max-width: 100%;
             height: auto;
             border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-button {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .toggle-button button {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-button button:hover {
+            background-color: #0056b3;
+        }
+        .toggle-view-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .toggle-view-icons button {
+            background-color: transparent;
+            border: none;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+        .toggle-view-icons button.active {
+            color: #4CAF50;
+        }
+        .chart-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <h1>Reviews Page</h1>
-    
-    <h2>Review Counts</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Year</th>
-                <th>Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in review_data %}
-            <tr>
-                <td>{{ item.rev_year }}</td>
-                <td>{{ item.count }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Reviews Page</h1>
+        
+        <div class="toggle-view-icons">
+            <button id="tableView" class="active" onclick="toggleView('table')">
+                <i class="fas fa-table"></i>
+                Table View
+            </button>
+            <button id="chartView" onclick="toggleView('chart')">
+                <i class="fas fa-chart-bar"></i>
+                Chart View
+            </button>
+            <button id="cloudView" onclick="toggleView('cloud')">
+                <i class="fas fa-cloud"></i>
+                Cloud View
+            </button>
+        </div>
+        
+        
+        <div id="tableViewContent">
+            <h2>Review Counts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in review_data %}
+                    <tr>
+                        <td>{{ item.rev_year }}</td>
+                        <td>{{ item.count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-    <h2>Review Summary</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Year</th>
-                <th>Cool Sum</th>
-                <th>Useful Sum</th>
-                <th>Funny Sum</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in summary_data %}
-            <tr>
-                <td>{{ item.rev_year }}</td>
-                <td>{{ item.rev_cool_sum }}</td>
-                <td>{{ item.rev_useful_sum }}</td>
-                <td>{{ item.rev_funny_sum }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <h2>Review Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Cool Sum</th>
+                        <th>Useful Sum</th>
+                        <th>Funny Sum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in summary_data %}
+                    <tr>
+                        <td>{{ item.rev_year }}</td>
+                        <td>{{ item.rev_cool_sum }}</td>
+                        <td>{{ item.rev_useful_sum }}</td>
+                        <td>{{ item.rev_funny_sum }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-    <h2>Word Count</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Word</th>
-                <th>Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in word_ranking_data %}
-            <tr>
-                <td>{{ item.word }}</td>
-                <td>{{ item.count }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <h2>Word Ranking</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in word_ranking_data %}
+                    <tr>
+                        <td>{{ item.word }}</td>
+                        <td>{{ item.count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="chartViewContent" style="display: none;">
+            <h2>Charts</h2>
+            <div class="chart-container">
+                <h2>Review Counts</h2>
+                <img src="/static/css/yearcount_chart.png" alt="Chart 1">
+            </div>
+            <div class="chart-container">
+                <h2>Review Summary</h2>
+                <img src="/static/css/summary_chart.png" alt="Chart 2">
+            </div>
+            <div class="chart-container">
+                <h2>Word Ranking</h2>
+                <img src="/static/css/wordranking_chart.png" alt="Chart 3">
+            </div>
+        </div>
 
-    <div class="word-cloud">
-        <h2>Word Cloud</h2>
-        <img src="/static/css/wordcloud.png" alt="Word Cloud">
+        <div id="cloudViewContent" style="display: none;">
+            <h2>Word Cloud</h2>
+            <div class="word-cloud">
+                <img src="/static/css/wordcloud.png" alt="Word Cloud">
+            </div>
+        </div>
     </div>
+
+    <script>
+        function toggleView(view) {
+            var tableViewContent = document.getElementById('tableViewContent');
+            var chartViewContent = document.getElementById('chartViewContent');
+            var cloudViewContent = document.getElementById('cloudViewContent');
+            var tableViewButton = document.getElementById('tableView');
+            var chartViewButton = document.getElementById('chartView');
+            var cloudViewButton = document.getElementById('cloudView');
+
+            switch (view) {
+                case 'table':
+                    tableViewContent.style.display = 'block';
+                    chartViewContent.style.display = 'none';
+                    cloudViewContent.style.display = 'none';
+                    tableViewButton.classList.add('active');
+                    chartViewButton.classList.remove('active');
+                    cloudViewButton.classList.remove('active');
+                    break;
+                case 'chart':
+                    tableViewContent.style.display = 'none';
+                    chartViewContent.style.display = 'block';
+                    cloudViewContent.style.display = 'none';
+                    tableViewButton.classList.remove('active');
+                    chartViewButton.classList.add('active');
+                    cloudViewButton.classList.remove('active');
+                    break;
+                case 'cloud':
+                    tableViewContent.style.display = 'none';
+                    chartViewContent.style.display = 'none';
+                    cloudViewContent.style.display = 'block';
+                    tableViewButton.classList.remove('active');
+                    chartViewButton.classList.remove('active');
+                    cloudViewButton.classList.add('active');
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
 </body>
 </html>

@@ -22,8 +22,11 @@ def users_page():
     yearly_growth = calculate_yearly_growth()
     popular_users = get_most_popular_users()
     total_review_count = total_reviews()
-    return render_template('Users.html',total_users=total_users_count,yearly_growth=yearly_growth, popular_users=popular_users, total_reviews=total_review_count)
-
+    return render_template('Users.html',total_users=total_users_count,yearly_growth=yearly_growth, popular_users=popular_users, total_reviews= total_review_count)
+# Function to calculate the total review count
+def total_reviews():
+    total_review_count = db.session.query(func.sum(User.user_review_count)).scalar()
+    return total_review_count
 
 ''''''''''''''''''''''''''''''''''''' users analysis'''''''''''''''''''''''''''''''''''''
 class User(db.Model):
@@ -50,6 +53,29 @@ class User(db.Model):
     user_compliment_funny = db.Column(db.Integer)
     user_compliment_writer = db.Column(db.Integer)
     user_compliment_photos = db.Column(db.Integer)
+
+''''''''''''''''''''''''''''''''''''' review analysis'''''''''''''''''''''''''''''''''''''
+class Review(db.Model):
+    __tablename__ = 'review_counts'
+    rev_year = db.Column(db.Integer, primary_key=True)
+    count = db.Column(db.Integer)
+
+class ReviewSummary(db.Model):
+    __tablename__ = 'review_summary'
+    rev_year = db.Column(db.Integer, primary_key=True)
+    rev_cool_sum = db.Column(db.Integer)
+    rev_useful_sum = db.Column(db.Integer)
+    rev_funny_sum = db.Column(db.Integer)
+
+class WordCount(db.Model):
+    __tablename__ = 'word_count_table'
+    word = db.Column(db.String(50), primary_key=True)
+    count = db.Column(db.Integer)
+
+
+
+
+
 
 # Function to calculate the yearly growth of user sign-ups
 def calculate_yearly_growth():
@@ -78,18 +104,23 @@ def get_most_popular_users(limit=10):
     popular_users = User.query.order_by(desc(User.user_review_count)).limit(limit).all()
     return popular_users
 
-# Function to calculate the total review count
-def total_reviews():
-    total_review_count = db.session.query(func.sum(User.user_review_count)).scalar()
-    return total_review_count
-
 
 @app.route('/Users.html')
-def users():
-    # Query the database to retrieve data from the users table
-    users_data = User.query.all()
-    return render_template('Users.html', users_data=users_data)
+def total_users():
+    total_users = User.query.count()
+    return f"Total Users: {total_users}"
 
-if __name__ == '__main__':
+''''''''''''''''''''''''''''''''''''' users analysis'''''''''''''''''''''''''''''''''''''
+@app.route('/templatesReviews.html')
+def reviews():
+    # Query data from all three tables
+    review_data = Review.query.order_by(Review.rev_year.asc()).all()
+    summary_data = ReviewSummary.query.order_by(ReviewSummary.rev_year.asc()).all()
+    word_ranking_data = WordCount.query.order_by(WordCount.count.desc()).limit(10).all()
+
+    # Pass data to the template
+    return render_template('Reviews.html', review_data=review_data, 
+                           summary_data=summary_data, word_ranking_data=word_ranking_data)
+
 if __name__ == '__main__':
    app.run(debug=True)
