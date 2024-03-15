@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -109,25 +108,43 @@
     </style>
 </head>
 <body>
-    <h1>Reviews Page</h1>
-    
-    <h2>Review Counts</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Year</th>
-                <th>Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in review_data %}
-            <tr>
-                <td>{{ item.rev_year }}</td>
-                <td>{{ item.count }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Reviews Page</h1>
+        
+        <div class="toggle-view-icons">
+            <button id="tableView" class="active" onclick="toggleView('table')">
+                <i class="fas fa-table"></i>
+                Table View
+            </button>
+            <button id="chartView" onclick="toggleView('chart')">
+                <i class="fas fa-chart-bar"></i>
+                Chart View
+            </button>
+            <button id="cloudView" onclick="toggleView('cloud')">
+                <i class="fas fa-cloud"></i>
+                Cloud View
+            </button>
+        </div>
+        
+        
+        <div id="tableViewContent">
+            <h2>Review Counts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in review_data %}
+                    <tr>
+                        <td>{{ item.rev_year }}</td>
+                        <td>{{ item.count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
             <h2>Review Summary</h2>
             <table>
