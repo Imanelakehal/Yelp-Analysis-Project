@@ -61,11 +61,13 @@ class User(db.Model):
 
 ''''''''''''''''''''''''''''''''''''' review analysis'''''''''''''''''''''''''''''''''''''
 class Review(db.Model):
+    __bind_key__ = 'users'
     __tablename__ = 'review_counts'
     rev_year = db.Column(db.Integer, primary_key=True)
     count = db.Column(db.Integer)
 
 class ReviewSummary(db.Model):
+    __bind_key__ = 'users'
     __tablename__ = 'review_summary'
     rev_year = db.Column(db.Integer, primary_key=True)
     rev_cool_sum = db.Column(db.Integer)
@@ -73,6 +75,7 @@ class ReviewSummary(db.Model):
     rev_funny_sum = db.Column(db.Integer)
 
 class WordCount(db.Model):
+    __bind_key__ = 'users'
     __tablename__ = 'word_count_table'
     word = db.Column(db.String(50), primary_key=True)
     count = db.Column(db.Integer)
@@ -199,6 +202,10 @@ def reviews():
     # Pass data to the template
     return render_template('Reviews.html', review_data=review_data, 
                            summary_data=summary_data, word_ranking_data=word_ranking_data)
+
+@app.route('/templatesabout.html')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
    app.run(debug=True)
