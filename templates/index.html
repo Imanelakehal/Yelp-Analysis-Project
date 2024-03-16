@@ -51,10 +51,16 @@
         <button id="checkinButton" class="button" style="margin-top: 14px;">
             <img src="static\css\icon6.svg" alt="icon6">  Check-in
         </button>
-        <button id="aboutButton" class="button" style="margin-top: 14px;">
+        <button id="aboutButton" class="button" style="margin-top: 14px;" onclick="redirectToGitHub()" value="https://github.com/Imanelakehal/Yelp-Analysis-Project">
             <img src="static\css\icon7.svg" alt="icon7"> About
         </button>
         
+        <script>
+            function redirectToGitHub(link){
+                console.log(link.value);
+                location.href= 'https://github.com/Imanelakehal/Yelp-Analysis-Project';
+            };
+        </script>
         <!-- Information section inside the navbar -->
         <div class="info-section">
             <div class="rectangle">
