@@ -3,178 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users Analysis</title>
-    <link rel="stylesheet" href="static\css\style.css">
+    <title>Yearly Check-in Counts</title>
     <style>
-        /* Custom styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            color: #165A4A;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            color: white;
-            text-align: center; /* Center the text */
-            font-size: 48px; /* Increase font size */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow */
-            margin-top: 20px; /* Add margin at the top */
-        }
-
-        .page-header {
-            background-color: #165A4A; /* Set background color */
-            color: white; /* Set text color */
-            padding: 20px; /* Add padding */
-            text-align: center; /* Center text */
-        }
-
-        .total-users {
-            background-color: white; /* Set background color */
-            border: 2px solid #165A4A; /* Set border color */
-            color: #165A4A; /* Set text color */
-            padding: 20px; /* Add padding */
-            border-radius: 10px; /* Add border radius */
-            margin: 20px auto; /* Center horizontally */
-            width: 80%; /* Set width */
-            max-width: 300px; /* Set max width */
-        }
-
-        .total-users h2 {
-            margin-top: 0; /* Remove top margin from h2 */
-        }
-        .total-reviews {
-           background-color: white; /* Set background color */
-           border: 2px solid #165A4A; /* Set border color */
-           color: #165A4A; /* Set text color */
-           padding: 20px; /* Add padding */
-           border-radius: 10px; /* Add border radius */
-           margin: 20px auto; /* Center horizontally */
-           width: 80%; /* Set width */
-           max-width: 300px; /* Set max width */
-           float: left; /* Float the element to the right */
-        }
-
-
-        .chart-container {
-            background-color: white;
-            border: 2px solid #165A4A;
-            padding: 20px;
+        table {
+            width: 50%;
+            border-collapse: collapse;
             margin: 20px auto;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
         }
-
-        .most-popular-users table {
-    width: 100%;
-    border-collapse: collapse; /* Collapse borders for better styling */
-}
-
-.most-popular-users th,
-.most-popular-users td {
-    border: 1px solid #165A4A; /* Add border to cells */
-    padding: 8px; /* Add padding to cells */
-}
-
-.most-popular-users th {
-    background-color: #82B9AE; /* Set background color for table header */
-    color: white; /* Set text color for table header */
-    font-weight: bold; /* Make header text bold */
-    text-align: left; /* Align header text to the left */
-}
-
-.most-popular-users tbody tr:nth-child(even) {
-    background-color: #F2F2F2; /* Alternate row background color */
-}
-
-.most-popular-users tbody tr:hover {
-    background-color: #D9D9D9; /* Hover color for rows */
-}
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #165A4A;
+            color: white;
+            text-align: center; /* Centering the title */
+        }
+        /* Hover effect */
+        tbody tr:hover {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
-    
-   <!-- Page Header -->
-   <div class="page-header">
-      <h1>Users Analysis</h1>
-   </div>
-   
-   <!-- Total Users Section -->
-   <div class="total-users">
-      <h2>Total Users</h2>
-      <p>{{ total_users }}</p>
-   </div>
-   <!-- Total Review Count -->
-   <div class="total-reviews">
-     <h2>Total Reviews</h2>
-     <p>Total Reviews: {{ total_reviews }}</p>
-   </div>
-   <!-- Chart.js library -->
-   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-   
-   <!-- Yearly Growth of User Sign-ups -->
-   <div class="chart-container">
-     <!-- Create canvas element for the chart -->
-     <canvas id="userGrowthChart" width="500" height="250"></canvas>
-   </div>
-   
-   <!-- Most Popular Users -->
-   <div class="most-popular-users">
-    <h2>Most Popular Users</h2>
+    <h2 style="text-align: center;">Yearly Check-in Counts</h2>
     <table>
         <thead>
             <tr>
-                <th>User Name</th>
-                <th>Reviews Count</th>
+                <th>Year</th>
+                <th>Count</th>
             </tr>
         </thead>
         <tbody>
-            {% for user in popular_users %}
+            {% for data in yearly_counts_data %}
             <tr>
-                <td>{{ user.user_name }}</td>
-                <td>{{ user.user_review_count }}</td>
+                <td>{{ data.year }}</td>
+                <td>{{ data.count }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-   </div>
-
-   <!-- JavaScript code to create Chart.js chart -->
-   <script>
-       // Retrieve yearly growth data from Flask template
-       const yearlyGrowthData = JSON.parse('{{ yearly_growth | tojson | safe }}');
-
-       // Extract years and user counts from the data
-       const years = Object.keys(yearlyGrowthData);
-       const userCounts = Object.values(yearlyGrowthData);
-
-       // Create a new Chart.js chart
-       const ctx = document.getElementById('userGrowthChart').getContext('2d');
-       const userGrowthChart = new Chart(ctx, {
-           type: 'line',
-           data: {
-               labels: years,
-               datasets: [{
-                   label: 'User Sign-ups',
-                   data: userCounts,
-                   backgroundColor: 'rgba(54, 162, 235, 0.2)', // Fill color
-                   borderColor: 'rgba(54, 162, 235, 1)', // Line color
-                   borderWidth: 1
-               }]
-           },
-           options: {
-               scales: {
-                   yAxes: [{
-                       ticks: {
-                           beginAtZero: true
-                       }
-                   }]
-               }
-           }
-       });
-   </script>
-
 </body>
 </html>

@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Yearly Check-in Counts</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #165A4A;
+            color: white;
+            text-align: center; /* Centering the title */
+        }
+    </style>
 </head>
 <body>
-    
+    <h2 style="text-align: center;">Yearly Check-in Counts</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in yearly_counts_data %}
+            <tr>
+                <td>{{ data.year }}</td>
+                <td>{{ data.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
